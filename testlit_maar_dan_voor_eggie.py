@@ -6,6 +6,18 @@ from feasability_check import is_bus_planning_feasible
 from bus_plan_check import bus_plan_timetable_check
 from Improvement_Code import improving_plan
 
+if "timetable" not in st.session_state:
+    st.session_state.timetable = False
+
+if "bus_plan" not in st.session_state:
+    st.session_state.bus_plan = False
+
+if "distance_matrix" not in st.session_state:
+    st.session_state.distance_matrix = False
+
+if "improved_plan" not in st.session_state:
+    st.session_state.improved_plan = False
+
 st.title("Improve bus plan for bus lines 400 and 401")
 
 with st.sidebar:
@@ -45,7 +57,11 @@ if (timetable != None) and (distance_matrix != None):
                     error_list = error_check.split("\n")
                     st.write(error_list)
 
-    improved_plan = improving_plan(df_timetable, df_distance_matrix)[1]
+    if (distance_matrix != st.session_state.distance_matrix) or (timetable != st.session_state.timetable):
+        improved_plan = improving_plan(df_timetable, df_distance_matrix)[1]
+    else:
+        improved_plan = st.session_state.improved_plan
+    
     [feasible, error_feasible, df_bus_plan_v2] = is_bus_planning_feasible(improved_plan, df_distance_matrix)
     [check, error_check] = bus_plan_timetable_check(df_bus_plan_v2, df_timetable)
 
@@ -69,5 +85,7 @@ if (timetable != None) and (distance_matrix != None):
                 error_list = error_check.split("\n")
                 st.write(error_list)
 
-
-        
+st.session_state.improved_plan = improved_plan
+st.session_state.bus_plan = bus_plan
+st.session_state.timetable = timetable
+st.session_state.distance_matrix = distance_matrix
