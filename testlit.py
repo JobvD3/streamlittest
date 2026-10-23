@@ -1,17 +1,8 @@
 import streamlit as st
 from wiskundaaaaaaaa import sommetje
+from opmaak import background_image
 
-sidebar_logo = "Untitled.png"
-main_logo = "images (1).png"
-st.logo(icon_image=main_logo, size="large")
-
-st.html("""
-  <style>
-    [alt=Logo] {
-      height: 4rem;
-    }
-  </style>
-        """)
+img = background_image("images (1).png")
 
 if "crush" not in st.session_state:
     st.session_state.crush = "name"
