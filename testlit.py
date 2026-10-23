@@ -1,10 +1,9 @@
 import streamlit as st
 from wiskundaaaaaaaa import sommetje
-from opmaak import background_image
 
 sidebar_logo = "transdev.png"
 main_logo = "images (1).png"
-st.logo(sidebar_logo, icon_image=main_logo)
+st.logo(sidebar_logo, size="large", icon_image=main_logo)
 
 if "crush" not in st.session_state:
     st.session_state.crush = "name"
