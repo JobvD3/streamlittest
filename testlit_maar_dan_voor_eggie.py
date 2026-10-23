@@ -26,7 +26,7 @@ if (timetable != None) and (distance_matrix != None):
         if feasible == False:
             with st.container():
                 st.subheader("The bus plan has errors")
-                error_list = error.split("\n")
+                error_list = error_feasible.split("\n")
                 st.write(error_list)
                 st.write([1,2,3,5])
 
