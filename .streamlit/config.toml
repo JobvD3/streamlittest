@@ -1,7 +1,7 @@
 [theme]
 base="light"
 primaryColor="crimson"
-
+backgroundColor="white"
 secondaryBackgroundColor="crimson"
 baseRadius="full"
 textColor="crimson"
