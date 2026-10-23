@@ -1,10 +1,15 @@
 import streamlit as st
 import pandas as pd
 
+from opmaak import background_image
 from make_data_usable import str_to_time
 from feasability_check import is_bus_planning_feasible
 from bus_plan_check import bus_plan_timetable_check
 from Improvement_Code import improving_plan
+
+img = background_image("images (1).png")
+st.markdown(img, unsafe_allow_html=False)
+
 
 if "timetable" not in st.session_state:
     st.session_state.timetable = False
