@@ -8,7 +8,7 @@ from bus_plan_check import bus_plan_timetable_check
 from Improvement_Code import improving_plan
 
 img = background_image("images (1).png")
-st.markdown(img, unsafe_allow_html=False)
+st.markdown(img, unsafe_allow_html=True)
 
 
 if "timetable" not in st.session_state:
