@@ -1,6 +1,7 @@
 import streamlit as st
 import pandas as pd
 
+from make_data_usable import str_to_time
 from feasability_check import is_bus_planning_feasible
 from bus_plan_check import bus_plan_timetable_check
 from Improvement_Code import improving_plan
@@ -16,6 +17,8 @@ with st.sidebar:
 if (timetable != None) and (distance_matrix != None):
     df_timetable = pd.read_excel(timetable)
     df_distance_matrix = pd.read_excel(distance_matrix)
+
+    df_timetable = str_to_time(df_timetable)
 
     if bus_plan != None:
         df_bus_plan = pd.read_excel(bus_plan)
