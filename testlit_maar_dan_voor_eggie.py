@@ -24,3 +24,4 @@ if (timetable != None) and (distance_matrix != None):
             st.subheader("The bus plan has errors")
             error_list = error.split("\n")
             st.write(error_list)
+            st.write([1,2,3,5])
