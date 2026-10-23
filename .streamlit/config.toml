@@ -11,3 +11,8 @@ backgroundColor="crimson"
 secondaryBackgroundColor="white"
 baseRadius="none"
 textColor="white"
+
+[theme.container]
+backgroundColor="crimson"
+secondaryBackgroundColor="white"
+textColor="white"
