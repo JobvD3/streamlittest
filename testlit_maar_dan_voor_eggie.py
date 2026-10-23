@@ -8,6 +8,9 @@ with st.sidebar:
     bus_plan = st.file_uploader("Upload here your bus plan", type="xlsx")
     distance_matrix = st.file_uploader("Upload here your distance matrix", type="xlsx")
 
+df = pd.read_excel("Timetable.xlsx")
+st.write(df)
+
 if (timetable != None) and (distance_matrix != None):
     if bus_plan != None:
         st.write(bus_plan)
