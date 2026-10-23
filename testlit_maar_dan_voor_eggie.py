@@ -3,9 +3,9 @@ import pandas as pd
 from feasability_check import is_bus_planning_feasible
 
 with st.sidebar:
-    timetable = pd.read_excel(st.file_uploader("Upload here your timetable"))
-    bus_plan = pd.read_excel(st.file_uploader("Upload here your bus plan"))
-    distance_matrix = pd.read_excel(st.file_uploader("Upload here your distance matrix"))
+    timetable = st.file_uploader("Upload here your timetable")
+    bus_plan = st.file_uploader("Upload here your bus plan")
+    distance_matrix = st.file_uploader("Upload here your distance matrix")
 
 if (timetable != None) and (distance_matrix != None):
     if bus_plan != None:
