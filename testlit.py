@@ -3,6 +3,7 @@ from wiskundaaaaaaaa import sommetje
 from opmaak import background_image
 
 img = background_image("images (1).png")
+st.markdown(img)
 
 if "crush" not in st.session_state:
     st.session_state.crush = "name"
