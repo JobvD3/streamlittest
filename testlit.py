@@ -9,6 +9,7 @@ st.html("""
   <style>
     [alt=Logo] {
       height: 5rem;
+      position: top left;
     }
   </style>
         """)
