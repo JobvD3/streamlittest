@@ -13,6 +13,6 @@ if (timetable != None) and (distance_matrix != None):
     df_distance_matrix = pd.read_excel(distance_matrix)
     if bus_plan != None:
         df_bus_plan = pd.read_excel(bus_plan)
-        [feasible, error, df_bus_plan_v2] = is_bus_planning_feasible(bus_plan, distance_matrix)
+        [feasible, error, df_bus_plan_v2] = is_bus_planning_feasible(df_bus_plan, distance_matrix)
         st.write(f"Is the bus plan feasible? {feasible}")
         st.write(error)
