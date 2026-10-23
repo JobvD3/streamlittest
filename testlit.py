@@ -8,7 +8,7 @@ st.logo(sidebar_logo, icon_image=main_logo, size="large")
 st.html("""
   <style>
     [alt=Logo] {
-      height: 3rem;
+      height: 5rem;
     }
   </style>
         """)
