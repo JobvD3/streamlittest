@@ -3,7 +3,7 @@ base="light"
 primaryColor="crimson"
 backgroundColor="white"
 secondaryBackgroundColor="crimson"
-baseRadius="full"
+baseRadius="none"
 textColor="crimson"
 
 [theme.sidebar]
