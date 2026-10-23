@@ -9,7 +9,7 @@ with st.sidebar:
 
 if (timetable != None) and (distance_matrix != None):
     if bus_plan != None:
-        st.write(type(bus_plan))
+        st.write(bus_plan)
         # [feasible, error, df_bus_plan] = is_bus_planning_feasible(bus_plan, distance_matrix)
         # st.write(f"Is the bus plan feasible? {feasible}")
         # st.write(error)
