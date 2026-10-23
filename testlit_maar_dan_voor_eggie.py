@@ -1,5 +1,6 @@
 import streamlit as st
 import pandas as pd
+print("yo")
 from feasability_check import is_bus_planning_feasible
 
 with st.sidebar:
@@ -14,8 +15,11 @@ if (timetable != None) and (distance_matrix != None):
                            "y" : [5,6,7,8]})
         st.write(df)
 
-        df2 = pd.read_excel("Timetable.xlsx")
+        df2 = pd.read_excel(bus_plan)
         st.write(df2)
         # [feasible, error, df_bus_plan] = is_bus_planning_feasible(bus_plan, distance_matrix)
         # st.write(f"Is the bus plan feasible? {feasible}")
         # st.write(error)
+
+df2 = pd.read_excel("Timetable.xlsx")
+print(df2)
