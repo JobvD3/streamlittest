@@ -1,2 +1,4 @@
 import streamlit as st
-st.write("Hello world!")
+
+crush = st.input("Write your crush")
+st.write("Hey {crush}... You probably don't know who I am... B-but I really l-like you!")
