@@ -2,8 +2,9 @@ import streamlit as st
 from wiskundaaaaaaaa import sommetje
 from opmaak import background_image
 
-img = background_image("images (1).png")
-st.markdown(img, unsafe_allow_html=True)
+sidebar_logo = "transdev.png"
+main_logo = "images (1).png"
+st.logo(sidebar_logo, icon_image=main_logo)
 
 if "crush" not in st.session_state:
     st.session_state.crush = "name"
