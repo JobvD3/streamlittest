@@ -1,6 +1,6 @@
 [theme]
-base="dark"
-primaryColor="white
+base="light"
+primaryColor="Red"
 backgroundColor="mintCream"
 secondaryBackgroundColor="darkSeaGreen"
 baseRadius="full"
