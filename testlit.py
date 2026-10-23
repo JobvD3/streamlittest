@@ -1,5 +1,9 @@
 import streamlit as st
 from wiskundaaaaaaaa import sommetje
+from opmaak import background_image
+
+img = background_image("images (1).png")
+st.markdown(img, unsafe_allow_html=True)
 
 if "crush" not in st.session_state:
     st.session_state.crush = "name"
@@ -19,12 +23,13 @@ st.write(f"Hey {crush}... You probably don't know who I am... B-but I really l-l
 antwoord = sommetje(nummer)
 st.write(f"You have {antwoord} banana's in your house")
 
-st.subheader("Previous")
+with st.container(border=True):
+    st.subheader("Previous")
 
-st.write(f"Hey {st.session_state.crush}... You probably don't know who I am... B-but I really l-like you!")
+    st.write(f"Hey {st.session_state.crush}... You probably don't know who I am... B-but I really l-like you!")
 
-antwoord = sommetje(st.session_state.nummer)
-st.write(f"You have {antwoord} banana's in your house")
+    antwoord = sommetje(st.session_state.nummer)
+    st.write(f"You have {antwoord} banana's in your house")
 
-st.session_state.crush = crush
-st.session_state.nummer = nummer
+    st.session_state.crush = crush
+    st.session_state.nummer = nummer
