@@ -348,7 +348,7 @@ def update_plan(improve_plan : pd.DataFrame, trip : pd.Series, distance_matrix :
     #If there is a bus at the station take the one with the lowes SoC
     if len(df_idle_trip_location) > 0:
         #makes a pd.Series from the last task of the choosen bus
-        s_bus = df_idle_trip_location.sort_values(["task_time", "battery_charge"], ascending=[False, True]).iloc[0]
+        s_bus = df_idle_trip_location.sort_values("battery_charge").iloc[0]
         #gives the bus number
         bus = s_bus.bus
         #gives the battery_charge of the bus
