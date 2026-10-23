@@ -14,7 +14,7 @@ if (timetable != None) and (distance_matrix != None):
                            "y" : [5,6,7,8]})
         st.write(df)
 
-        df2 = pd.read_excel(timetable)
+        df2 = pd.read_excel("Timetable.xlsx")
         st.write(df2)
         # [feasible, error, df_bus_plan] = is_bus_planning_feasible(bus_plan, distance_matrix)
         # st.write(f"Is the bus plan feasible? {feasible}")
