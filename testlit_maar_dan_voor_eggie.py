@@ -21,7 +21,7 @@ if "improved_plan" not in st.session_state:
 st.title("Improve bus plan for bus lines 400 and 401")
 
 with st.sidebar:
-    st.header("Import here your data as excel files")
+    st.title("Import here your data as excel files")
     timetable = st.file_uploader("Upload here your timetable", type="xlsx")
     bus_plan = st.file_uploader("Upload here your bus plan", type="xlsx")
     distance_matrix = st.file_uploader("Upload here your distance matrix", type="xlsx")
