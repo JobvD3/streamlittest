@@ -4,6 +4,7 @@ primaryColor="crimson"
 backgroundColor="white"
 secondaryBackgroundColor="crimson"
 baseRadius="full"
+textColor="crimson"
 
 [theme.sidebar]
 backgroundColor="crimson"
