@@ -29,8 +29,15 @@ if (timetable != None) and (distance_matrix != None):
                 with st.container(border=True, height=100):
                     error_list = error_feasible.split("\n")
                     st.write(error_list)
-                    st.write([1,2,3,5])
 
-        st.subheader("Does the bus plan schedule all trips from the timetable?")
-        st.write(check)
+        with st.container(border=True):
+            st.subheader("Does the bus plan schedule all trips from the timetable?")
+            st.write(check)
+
+            if check == False:
+                st.subheader("The trips that are not acounted for are")
+                with st.container(border=True, height=100):
+                    error_list = error_check.split("\n")
+                    st.write(error_list)
+
         
