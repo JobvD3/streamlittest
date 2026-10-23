@@ -1,11 +1,11 @@
 [theme]
 base="light"
-primaryColor="red"
+primaryColor="crimson"
 backgroundColor="white"
-secondaryBackgroundColor="red"
+secondaryBackgroundColor="crimson"
 baseRadius="full"
 
 [theme.sidebar]
-backgroundColor="red"
+backgroundColor="crimson"
 secondaryBackgroundColor="white"
 baseRadius="none"
