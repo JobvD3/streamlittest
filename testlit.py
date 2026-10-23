@@ -1,7 +1,7 @@
 import streamlit as st
 from wiskundaaaaaaaa import sommetje
 
-sidebar_logo = "transdev.png"
+sidebar_logo = "Untitled.png"
 main_logo = "images (1).png"
 st.logo(main_logo, icon_image=main_logo, size="large")
 
