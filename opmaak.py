@@ -12,8 +12,8 @@ def background_image(img : str):
     <style>
     [data-testid="stAppViewContainer"] {{
     background-image: url("data:image/png;base64,{plaatje}");
-    background-size: 30%;
-    background-position: bottom right;
+    background-size: 10%;
+    background-position: top right;
     background-repeat: no-repeat;
     }}
     </style>
