@@ -13,7 +13,7 @@ def background_image(img : str):
     [data-testid="stAppViewContainer"] {{
     background-image: url("data:image/png;base64,{plaatje}");
     background-size: 10%;
-    background-position: top right;
+    background-position: top left;
     background-repeat: no-repeat;
     }}
     </style>
