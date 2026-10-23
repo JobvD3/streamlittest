@@ -3,7 +3,7 @@ from wiskundaaaaaaaa import sommetje
 
 sidebar_logo = "Untitled.png"
 main_logo = "images (1).png"
-st.logo(sidebar_logo, icon_image=main_logo, size="large")
+st.logo(icon_image=main_logo, size="large")
 
 st.html("""
   <style>
