@@ -1,9 +1,11 @@
 [theme]
 base="light"
-backgroundColor="white"
-secondaryBackgroundColor="lavender"
-codeBackgroundColor="powderBlue"
+primaryColor="slateBlue"
+backgroundColor="mintCream"
+secondaryBackgroundColor="darkSeaGreen"
+baseRadius="full"
 
 [theme.sidebar]
-backgroundColor="ghostWhite"
-secondaryBackgroundColor="lavender"
+backgroundColor="aliceBlue"
+secondaryBackgroundColor="skyBlue"
+baseRadius="none"
