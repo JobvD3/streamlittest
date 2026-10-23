@@ -5,11 +5,10 @@ sidebar_logo = "Untitled.png"
 main_logo = "images (1).png"
 st.logo(sidebar_logo, icon_image=main_logo, size="large")
 
-st.html("""
+st.markdown("""
   <style>
     [alt=Logo] {
       height: 5rem;
-      position: top left;
     }
   </style>
         """)
