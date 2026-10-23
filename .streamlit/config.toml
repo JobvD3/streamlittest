@@ -2,8 +2,8 @@
 base="light"
 primaryColor="crimson"
 backgroundColor="white"
-secondaryBackgroundColor="crimson"
-baseRadius="none"
+secondaryBackgroundColor="black"
+baseRadius="full"
 textColor="crimson"
 
 [theme.sidebar]
