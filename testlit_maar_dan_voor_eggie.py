@@ -59,8 +59,9 @@ if (timetable != None) and (distance_matrix != None):
 
     if (distance_matrix != st.session_state.distance_matrix) or (timetable != st.session_state.timetable):
         improved_plan = improving_plan(df_timetable, df_distance_matrix)[1]
-    else:
-        improved_plan = st.session_state.improved_plan
+        st.session_state.improved_plan = improved_plan
+    
+    improved_plan = st.session_state.improved_plan
     
     [feasible, error_feasible, df_bus_plan_v2] = is_bus_planning_feasible(improved_plan, df_distance_matrix)
     [check, error_check] = bus_plan_timetable_check(df_bus_plan_v2, df_timetable)
