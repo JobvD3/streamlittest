@@ -47,10 +47,10 @@ def plot_gantt_chart(datas: pd.DataFrame, busses_list: list):
                        edgecolor = ['black'])
 
         if min(single_bus_schedule["start time"])//1 < min_time:
-            min_time = min(single_bus_schedule["start time"])//1
+            min_time = int(min(single_bus_schedule["start time"])//1)
 
         if max(single_bus_schedule["end time"])//1 + 1 > max_time:
-            max_time = max(single_bus_schedule["end time"])//1 + 1
+            max_time = int(max(single_bus_schedule["end time"])//1 + 1)
 
     #patches = []
     
