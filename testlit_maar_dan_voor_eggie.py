@@ -12,12 +12,15 @@ from gantt_chart import plot_gantt_chart
 def switch_tab(tab):
     st.session_state.tab = tab
 
+def on_tab_change():
+    st.toast(f"You opened the {st.session_state.tab} tab.")
+
 imag = background_image("images (1).png")
 st.markdown(imag, unsafe_allow_html=True)
 
 st.title("Bus plan improver for Transdev")
 
-[tab1, tab2, tab3, tab4, tab5, tab6] = st.tabs(["Home", "All", "original plan", "improved plan", "KPI's", "Gantt-Chart"])
+[tab1, tab2, tab3, tab4, tab5, tab6] = st.tabs(["Home", "All", "original plan", "improved plan", "KPI's", "Gantt-Chart"], on_change=on_tab_change, key="tab")
 
 if "timetable" not in st.session_state:
     st.session_state.timetable = False
@@ -48,9 +51,9 @@ with tab1:
 
     st.subheader("Choose page")
 
-    [all, org, impr, kpi, gantt] = st.columns(5)
+    [alles, org, impr, kpi, gantt] = st.columns(5)
 
-    all.button("All", on_click=switch_tab, args=("All",))
+    alles.button("All", on_click=switch_tab, args=("All",))
     org.button("Original plan", on_click=switch_tab, args=("Original plan",))
 
 
