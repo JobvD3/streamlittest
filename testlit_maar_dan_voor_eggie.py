@@ -12,7 +12,7 @@ from gantt_chart import plot_gantt_chart
 imag = background_image("images (1).png")
 st.markdown(imag, unsafe_allow_html=True)
 
-st.title("Improve bus plan for bus lines 400 and 401")
+st.title("Bus plan improver for Transdev")
 
 [tab1, tab2, tab3, tab4, tab5, tab6] = st.tabs(["Home", "All", "Feasability original plan", "Feasability improved plan", "KPI's", "Gantt-Chart"])
 
