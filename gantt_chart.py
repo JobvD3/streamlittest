@@ -29,7 +29,6 @@ def plot_gantt_chart(datas: pd.DataFrame, busses_list: list):
     max_time = 0
     nr_bus = 0
     for busses in busses_list:
-        nr_bus += 1
         single_bus_schedule = datas[datas['bus']==busses]
         bus_scedules_dict[busses] = single_bus_schedule
 
@@ -53,6 +52,8 @@ def plot_gantt_chart(datas: pd.DataFrame, busses_list: list):
 
         if max(single_bus_schedule["end time"])//1 + 1 > max_time:
             max_time = int(max(single_bus_schedule["end time"])//1 + 1)
+
+        nr_bus += 1
 
     #patches = []
     
