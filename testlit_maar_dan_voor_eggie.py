@@ -186,6 +186,22 @@ with tab3:
     else:
         st.subheader("Upload bus plan")
 
+    if type(st.session_state.bus_plan) != bool:
+        with st.container(border=True):
+            st.subheader("Gantt-Chart of the original bus planning")
+            all_buses = list(pd.unique(df_bus_plan_v2['bus']))
+            buses_2 = st.multiselect('Which bus of the bus plan do you want to see the table of',
+                                                                    all_buses,
+                                                                    default=all_buses,
+                                                                    key=3)
+
+            plot_gantt_chart(df_bus_plan_v2, buses_2)
+
+    if type(st.session_state.df_kpi) != bool:
+        if "Original plan" in df_kpi.columns:
+            with st.container(border=True):
+                st.write(df_kpi["Orginal plan"])
+
 with tab4:
     if type(st.session_state.improved_plan) != bool:
         with st.container(border=True):
@@ -207,6 +223,21 @@ with tab4:
                 with st.container(border=True, height=100):
                     error_list = impr_error_check.split("\n")
                     st.write(error_list)
+
+    if type(st.session_state.improved_plan) != bool:
+        with st.container(border=True):
+            st.subheader("Gantt-Chart of the improved bus planning")
+            impr_all_buses = list(pd.unique(improved_plan_v2['bus']))
+            impr_buses_2 = st.multiselect('Which bus of the bus plan do you want to see the table of',
+                                                                    impr_all_buses,
+                                                                    default=impr_all_buses,
+                                                                    key=4)
+
+            plot_gantt_chart(improved_plan_v2, impr_buses_2)
+
+    if type(st.session_state.df_kpi) != bool:
+        with st.container(border=True):
+            st.write(df_kpi["Improved plan"])
 
 with tab5:
     if type(st.session_state.df_kpi) != bool:
