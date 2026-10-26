@@ -27,7 +27,9 @@ def plot_gantt_chart(datas: pd.DataFrame, busses_list: list):
 
     min_time = 24
     max_time = 0
+    nr_bus = 0
     for busses in busses_list:
+        nr_bus += 1
         single_bus_schedule = datas[datas['bus']==busses]
         bus_scedules_dict[busses] = single_bus_schedule
 
@@ -42,7 +44,7 @@ def plot_gantt_chart(datas: pd.DataFrame, busses_list: list):
         
         x_rans = list(zip(list(single_bus_schedule['start time']),list(single_bus_schedule['duration'])))
         ax.broken_barh(xranges = x_rans,
-                       yrange = (single_bus_schedule['bus'].iloc[0],0.8),
+                       yrange = (nr_bus,0.8),
                        color = single_bus_schedule['color'],
                        edgecolor = ['black'])
 
@@ -73,8 +75,8 @@ def plot_gantt_chart(datas: pd.DataFrame, busses_list: list):
     ax.set_xlim(min_time, max_time)
     ax.set_xticks(range(min_time - 1, max_time + 1))
     ax.set_xticklabels(hours)
-    ax.set_yticks(range(0,len(bus_scedules_dict)))
-    ax.set_yticklabels(list(bus_scedules_dict))
+    ax.set_yticks(range(0,nr_bus))
+    ax.set_yticklabels(busses_list)
     ax.grid(True)
     # ax.legend(handles=patches)
     st.pyplot(fig)
