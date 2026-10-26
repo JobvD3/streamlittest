@@ -68,7 +68,7 @@ def plot_gantt_chart(datas: pd.DataFrame, busses_list: list):
         hours = [*range(min_time - 1, 24)]
         hours += [*range(0, time_over + 1)]
     else:
-        hours = range(min_time, max_time)
+        hours = range(min_time-1, max_time+1)
     #hours = list(map(str, hours))
 
     ax.invert_yaxis()
