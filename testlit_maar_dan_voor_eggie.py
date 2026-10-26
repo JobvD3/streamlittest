@@ -57,7 +57,7 @@ with tab1:
     org.button("Original plan", on_click=switch_tab, args=("Original plan",), width="stretch")
     impr.button("Improved plan", on_click=switch_tab, args=("Improved plan",), width="stretch")
     kpi.button("KPI's", on_click=switch_tab, args=("KPI's",), width="stretch")
-    gantt.button("Gantt-Chart", on_click=switch_tab, args=("Gantt_Chart",), width="stretch")
+    gantt.button("Gantt-Chart", on_click=switch_tab, args=("Gantt-Chart",), width="stretch")
 
 
 with tab2:
