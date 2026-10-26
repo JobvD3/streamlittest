@@ -116,7 +116,8 @@ with tab1:
                 all_buses = list(pd.unique(df_bus_plan_v2['bus']))
                 buses = st.multiselect('Which bus of the bus plan do you want to see the table of',
                                                                         all_buses,
-                                                                        default=all_buses)
+                                                                        default=all_buses,
+                                                                        key=1)
         
                 plot_gantt_chart(df_bus_plan_v2, buses)
     
@@ -125,7 +126,8 @@ with tab1:
             impr_all_buses = list(pd.unique(improved_plan_v2['bus']))
             impr_buses = st.multiselect('Which bus of the bus plan do you want to see the table of',
                                                                     impr_all_buses,
-                                                                    default=impr_all_buses)
+                                                                    default=impr_all_buses,
+                                                                    key=2)
     
             plot_gantt_chart(improved_plan_v2, impr_buses)
 
@@ -189,7 +191,8 @@ with tab5:
             all_buses = list(pd.unique(df_bus_plan_v2['bus']))
             buses_2 = st.multiselect('Which bus of the bus plan do you want to see the table of',
                                                                     all_buses,
-                                                                    default=all_buses)
+                                                                    default=all_buses,
+                                                                    key=3)
     
             plot_gantt_chart(df_bus_plan_v2, buses_2)
 
@@ -198,6 +201,7 @@ with tab5:
         impr_all_buses = list(pd.unique(improved_plan_v2['bus']))
         impr_buses_2 = st.multiselect('Which bus of the bus plan do you want to see the table of',
                                                                 impr_all_buses,
-                                                                default=impr_all_buses)
+                                                                default=impr_all_buses,
+                                                                key=4)
 
         plot_gantt_chart(improved_plan_v2, impr_buses_2)
