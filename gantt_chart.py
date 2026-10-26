@@ -1,7 +1,19 @@
+from datetime import datetime as dt
 import pandas as pd
 import streamlit as st
 import matplotlib.pyplot as plt
 
+def reformat_time(bus_schedule_time : pd.Series) -> pd.Series:
+    '''
+    reformats the time in the inputted row from '%H:%M:%S' to total hours
+    '''
+
+    TFM = '%H:%M:%S'
+    reformed_bus_schedule_time = [
+    round(float((x-dt.strptime('00:00:00', TFM)).total_seconds()/3600),4)
+    for x in bus_schedule_time
+    ]
+    return reformed_bus_schedule_time
 
 def plot_gantt_chart(datas: pd.DataFrame, busses_list: list):
     """
@@ -16,6 +28,8 @@ def plot_gantt_chart(datas: pd.DataFrame, busses_list: list):
         single_bus_schedule = datas[datas['bus']==busses]
         bus_scedules_dict[busses] = single_bus_schedule
 
+        single_bus_schedule['end time'] = reformat_time(single_bus_schedule['end time'])
+        single_bus_schedule['start time'] = reformat_time(single_bus_schedule['start time'])
         single_bus_schedule['duration'] = single_bus_schedule['end time'] - single_bus_schedule['start time']
         single_bus_schedule['color'] = single_bus_schedule['activity']
         colors_list = ['Purple','Blue','Gray','Green']
