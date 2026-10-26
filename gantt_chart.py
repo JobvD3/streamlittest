@@ -2,6 +2,7 @@ from datetime import datetime as dt
 import pandas as pd
 import streamlit as st
 import matplotlib.pyplot as plt
+import matplotlib.patches as mlt
 
 def reformat_time(bus_schedule_time : pd.Series) -> pd.Series:
     '''
@@ -55,13 +56,9 @@ def plot_gantt_chart(datas: pd.DataFrame, busses_list: list):
 
         nr_bus += 1
 
-    #patches = []
-    
-    # dict_color_activity = [{colors_list[x]: activities_list[x]} for x in range(len(colors_list))]
-    # for i, (color, activity) in enumerate(dict_color_activity):
-        # st.text(f'{color=}, {activity=}, {i=}')
-        # st.text('space')
-        # patches.append([mps.Patch(color= color)])
+    legenda = []
+    for x in range(len(activities_list)):
+        legenda.append(mlt.Patch(color=colors_list[x], label=activities_list[x]))
 
     if max_time > 24:
         time_over = max_time - 24
@@ -78,7 +75,7 @@ def plot_gantt_chart(datas: pd.DataFrame, busses_list: list):
     ax.set_yticks(range(0,nr_bus))
     ax.set_yticklabels(busses_list)
     ax.grid(True)
-    ax.legend()
+    ax.legend(handles=legenda)
 
     fig.set_figheight(nr_bus*0.5)
     st.pyplot(fig)
