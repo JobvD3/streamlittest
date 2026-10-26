@@ -75,7 +75,7 @@ def plot_gantt_chart(datas: pd.DataFrame, busses_list: list):
     ax.set_yticks(range(0,nr_bus))
     ax.set_yticklabels(busses_list)
     ax.grid(True)
-    fig.legend(handles=legenda)
 
     fig.set_figheight(nr_bus*0.5)
+    fig.legend(handles=legenda)
     st.pyplot(fig)
