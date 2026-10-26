@@ -49,7 +49,15 @@ with st.sidebar:
     bus_plan = st.file_uploader("Upload here your bus plan", type="xlsx")
     distance_matrix = st.file_uploader("Upload here your distance matrix", type="xlsx")
     st.markdown("Press this button to Re-Run the page")
-    st.button("Re-Run", width="stretch", type="secondary")
+    if st.button("Re-Run", width="stretch", type="secondary"):
+        st.session_state.timetable = False
+        st.session_state.bus_plan = False
+        st.session_state.bus_plan_v2 = [False, False, False, False, False]
+        st.session_state.distance_matrix = False
+        st.session_state.improved_plan = False
+        st.session_state.improved_plan_v2 = [False, False, False, False, False]
+        st.session_state.df_kpi = False
+        st.rerun()
 
 with tab1:
     st.header("Welcome to the bus planner tool for line 400 and 401")
