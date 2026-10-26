@@ -51,10 +51,17 @@ def plot_gantt_chart(datas: pd.DataFrame, busses_list: list):
         # st.text('space')
         # patches.append([mps.Patch(color= color)])
 
+    if (max(single_bus_schedule["end time"])//1 + 1) > 24:
+        time_over = max(single_bus_schedule["end time"])//1 + 1 - 24
+        hours = range(min(single_bus_schedule["start time"])//1, 25)
+        hours.append(range(0, time_over + 1))
+    else:
+        hours = range(min(single_bus_schedule["start time"])//1, max(single_bus_schedule["end time"])//1 + 1)
+
     ax.invert_yaxis()
     ax.set_title('Gantt chart of the bus plan')
     ax.set_xlim(min(single_bus_schedule["start time"])//1, max(single_bus_schedule["end time"])//1 + 1)
-    ax.set_xticks((list(range(5,25)) + list(range(0,5))))
+    ax.set_xticks(hours)
     ax.set_yticks(list(bus_scedules_dict))
     ax.grid(True)
     # ax.legend(handles=patches)
