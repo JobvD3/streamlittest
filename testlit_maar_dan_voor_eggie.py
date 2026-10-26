@@ -20,7 +20,7 @@ st.markdown(imag, unsafe_allow_html=True)
 
 st.title("Bus plan improver for Transdev")
 
-[tab1, tab2, tab3, tab4, tab5, tab6] = st.tabs(["Home", "All", "original plan", "improved plan", "KPI's", "Gantt-Chart"], on_change=on_tab_change, key="tab")
+[tab1, tab2, tab3, tab4, tab5, tab6] = st.tabs(["Home", "All", "Original plan", "Improved plan", "KPI's", "Gantt-Chart"], on_change=on_tab_change, key="tab")
 
 if "timetable" not in st.session_state:
     st.session_state.timetable = False
@@ -55,6 +55,9 @@ with tab1:
 
     alles.button("All", on_click=switch_tab, args=("All",))
     org.button("Original plan", on_click=switch_tab, args=("Original plan",))
+    impr.button("Improved plan", on_click=switch_tab, args=("Improved plan",))
+    kpi.button("KPI's", on_click=switch_tab, args=("KPI's",))
+    gantt.button("Gantt-Chart", on_click=switch_tab, args=("Gantt_Chart",))
 
 
 with tab2:
