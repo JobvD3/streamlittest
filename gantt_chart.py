@@ -37,9 +37,12 @@ def plot_gantt_chart(datas: pd.DataFrame, busses_list: list):
             index_activity = activities_list.index(single_bus_schedule['activity'].loc[activities])
             single_bus_schedule.loc[activities,['color']] = colors_list[index_activity]
         
-        x_rans = [min(single_bus_schedule["start time"])//1, max(single_bus_schedule["end time"])//1 + 1]
-        ax.broken_barh(xranges = x_rans, yrange = (single_bus_schedule['bus'].iloc[0],0.8),color = single_bus_schedule['color'],
-                        edgecolor = ['black'])
+        x_rans = list(zip(list(single_bus_schedule['start time']),list(single_bus_schedule['duration'])))
+        ax.broken_barh(xranges = x_rans,
+                       yrange = (single_bus_schedule['bus'].iloc[0],0.8),
+                       color = single_bus_schedule['color'],
+                       edgecolor = ['black'])
+        ax.set_xlim(min(single_bus_schedule["start time"])//1, max(single_bus_schedule["end time"])//1 + 1)
 
     #patches = []
     
