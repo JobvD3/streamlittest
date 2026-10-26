@@ -191,7 +191,7 @@ with tab4:
             st.write(df_kpi)
 
 with tab5:
-    if bus_plan != None:
+    if st.session_state.bus_plan != False:
         with st.container(border=True):
             st.subheader("Gantt-Chart of the original bus planning")
             all_buses = list(pd.unique(df_bus_plan_v2['bus']))
@@ -202,12 +202,13 @@ with tab5:
     
             plot_gantt_chart(df_bus_plan_v2, buses_2)
 
-    with st.container(border=True):
-        st.subheader("Gantt-Chart of the improved bus planning")
-        impr_all_buses = list(pd.unique(improved_plan_v2['bus']))
-        impr_buses_2 = st.multiselect('Which bus of the bus plan do you want to see the table of',
-                                                                impr_all_buses,
-                                                                default=impr_all_buses,
-                                                                key=4)
+    if st.session_state.improved_plan != False:
+        with st.container(border=True):
+            st.subheader("Gantt-Chart of the improved bus planning")
+            impr_all_buses = list(pd.unique(improved_plan_v2['bus']))
+            impr_buses_2 = st.multiselect('Which bus of the bus plan do you want to see the table of',
+                                                                    impr_all_buses,
+                                                                    default=impr_all_buses,
+                                                                    key=4)
 
-        plot_gantt_chart(improved_plan_v2, impr_buses_2)
+            plot_gantt_chart(improved_plan_v2, impr_buses_2)
