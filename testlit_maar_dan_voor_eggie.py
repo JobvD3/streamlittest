@@ -95,7 +95,7 @@ if (timetable != None) and (distance_matrix != None):
 
     with st.container(border=True):
         st.subheader("KPI's")
-        [impr_bus, impr_ec, impr_stnd] = calculate_kpis(improved_plan)
+        [impr_bus, impr_ec, impr_stnd] = calculate_kpis(improved_plan_v2)
         df_kpi = pd.DataFrame(index=["Total busses", "Total energy consumption", "Time not moving"])
 
         if (bus_plan != None) or (bus_plan != False):
