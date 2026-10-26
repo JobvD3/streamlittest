@@ -14,7 +14,7 @@ st.markdown(imag, unsafe_allow_html=True)
 
 st.title("Improve bus plan for bus lines 400 and 401")
 
-[tab1, tab2, tab3, tab4, tab5] = st.tabs(["All", "Feasability original plan", "Feasability improved plan", "KPI's", "Gantt-Chart"])
+[tab1, tab2, tab3, tab4, tab5, tab6] = st.tabs(["Home", "All", "Feasability original plan", "Feasability improved plan", "KPI's", "Gantt-Chart"])
 
 if "timetable" not in st.session_state:
     st.session_state.timetable = False
@@ -40,6 +40,10 @@ with st.sidebar:
     st.button("Re-Run")
 
 with tab1:
+    st.header("Welcome to the bus planner tool for line 400 and 401")
+    st.markdown("This is the homepage of the tool, here you will find general information about the tool like instrunctions, but for those who want to dive straight in you can go to one of our other pages to get straight into action.")
+
+with tab2:
     if (timetable != None) and (distance_matrix != None):
         df_timetable = pd.read_excel(timetable)
         df_distance_matrix = pd.read_excel(distance_matrix)
@@ -141,7 +145,7 @@ with tab1:
         st.session_state.distance_matrix = distance_matrix
         st.session_state.df_kpi = df_kpi
 
-with tab2:
+with tab3:
     if type(st.session_state.bus_plan) != bool:
         with st.container(border=True):
             st.subheader("Is the bus plan feasible?")
@@ -165,7 +169,7 @@ with tab2:
     else:
         st.subheader("Upload bus plan")
 
-with tab3:
+with tab4:
     if type(st.session_state.improved_plan) != bool:
         with st.container(border=True):
             st.subheader("Is the improved bus plan feasible?")
@@ -187,12 +191,12 @@ with tab3:
                     error_list = impr_error_check.split("\n")
                     st.write(error_list)
 
-with tab4:
+with tab5:
     if type(st.session_state.df_kpi) != bool:
         with st.container(border=True):
             st.write(df_kpi)
 
-with tab5:
+with tab6:
     if type(st.session_state.bus_plan) != bool:
         with st.container(border=True):
             st.subheader("Gantt-Chart of the original bus planning")
