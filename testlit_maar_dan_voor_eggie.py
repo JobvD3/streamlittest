@@ -160,7 +160,7 @@ with tab2:
         st.subheader("Upload bus plan")
 
 with tab3:
-    if improved_plan != None:
+    if st.session_state.improved_plan != False:
         with st.container(border=True):
             st.subheader("Is the improved bus plan feasible?")
             st.write(impr_feasible)
