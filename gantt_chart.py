@@ -46,8 +46,7 @@ def plot_gantt_chart(datas: pd.DataFrame, busses_list: list):
         ax.broken_barh(xranges = x_rans,
                        yrange = (nr_bus,0.8),
                        color = single_bus_schedule['color'],
-                       edgecolor = ['black'],
-                       label = single_bus_schedule["activity"])
+                       edgecolor = ['black'])
 
         if min(single_bus_schedule["start time"])//1 < min_time:
             min_time = int(min(single_bus_schedule["start time"])//1)
@@ -75,9 +74,8 @@ def plot_gantt_chart(datas: pd.DataFrame, busses_list: list):
     ax.set_xticklabels(hours)
     ax.set_yticks(range(0,nr_bus))
     ax.set_yticklabels(busses_list)
-    ax.legend()
     ax.grid(True)
 
     fig.set_figheight(nr_bus*0.5)
-    #fig.legend(handles=legenda)
+    fig.legend(handles=legenda, loc=1)
     st.pyplot(fig)
