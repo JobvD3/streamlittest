@@ -28,6 +28,9 @@ if "distance_matrix" not in st.session_state:
 if "improved_plan" not in st.session_state:
     st.session_state.improved_plan = False
 
+if "df_kpi" not in st.session_state:
+    st.session_state.df_kpi = False
+
 with st.sidebar:
     st.title("Import here your data as excel files")
     timetable = st.file_uploader("Upload here your timetable", type="xlsx")
@@ -134,9 +137,10 @@ with tab1:
         st.session_state.improved_plan = improved_plan
         st.session_state.timetable = timetable
         st.session_state.distance_matrix = distance_matrix
+        st.session_state.df_kpi = df_kpi
 
 with tab2:
-    if bus_plan != None:
+    if st.session_state.bus_plan != False:
         with st.container(border=True):
             st.subheader("Is the bus plan feasible?")
             st.write(feasible)
@@ -182,8 +186,9 @@ with tab3:
                     st.write(error_list)
 
 with tab4:
-    with st.container(border=True):
-        st.write(df_kpi)
+    if st.session_state.df_kpi != False:
+        with st.container(border=True):
+            st.write(df_kpi)
 
 with tab5:
     if bus_plan != None:
