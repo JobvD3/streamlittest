@@ -14,7 +14,7 @@ st.markdown(imag, unsafe_allow_html=True)
 
 st.title("Bus plan improver for Transdev")
 
-[tab1, tab2, tab3, tab4, tab5, tab6] = st.tabs(["Home", "All", "Feasability original plan", "Feasability improved plan", "KPI's", "Gantt-Chart"])
+[tab1, tab2, tab3, tab4, tab5, tab6] = st.tabs(["Home", "All", "original plan", "improved plan", "KPI's", "Gantt-Chart"])
 
 if "timetable" not in st.session_state:
     st.session_state.timetable = False
@@ -42,6 +42,14 @@ with st.sidebar:
 with tab1:
     st.header("Welcome to the bus planner tool for line 400 and 401")
     st.markdown("This is the homepage of the tool, here you will find general information about the tool like instrunctions, but for those who want to dive straight in you can go to one of our other pages to get straight into action.")
+
+    st.subheader("Choose page")
+
+    [all, org, impr, kpi, gantt] = st.columns(5)
+
+    all.button("All", on_click=switch_tab, args=("All"))
+    org.button("Original plan", on_click=switch_tab, args=("Original plan"))
+
 
 with tab2:
     if (timetable != None) and (distance_matrix != None):
