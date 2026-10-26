@@ -73,7 +73,7 @@ def plot_gantt_chart(datas: pd.DataFrame, busses_list: list):
     ax.set_xlim(min_time, max_time)
     ax.set_xticks(range(min_time - 1, max_time + 1))
     ax.set_xticklabels(hours)
-    ax.set_yticks(range(0,len(list(bus_scedules_dict))))
+    ax.set_yticks(range(0,len(bus_scedules_dict)))
     ax.set_yticklabels(list(bus_scedules_dict))
     ax.grid(True)
     # ax.legend(handles=patches)
