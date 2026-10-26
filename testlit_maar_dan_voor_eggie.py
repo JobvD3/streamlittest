@@ -7,13 +7,14 @@ from feasability_check import is_bus_planning_feasible
 from bus_plan_check import bus_plan_timetable_check
 from Improvement_Code import improving_plan
 from KPI_calculator import calculate_kpis
+from gantt_chart import plot_gantt_chart
 
 imag = background_image("images (1).png")
 st.markdown(imag, unsafe_allow_html=True)
 
 st.title("Improve bus plan for bus lines 400 and 401")
 
-[tab1, tab2, tab3, tab4] = st.tabs(["All", "Feasability original plan", "Feasability improved plan", "KPI's"])
+[tab1, tab2, tab3, tab4, tab5] = st.tabs(["All", "Feasability original plan", "Feasability improved plan", "KPI's", "Gantt-Chart"])
 
 if "timetable" not in st.session_state:
     st.session_state.timetable = False
@@ -161,3 +162,12 @@ with tab3:
 with tab4:
     with st.container(border=True):
         st.write(df_kpi)
+
+with tab5:
+    with st.container(border=True):
+        impr_all_buses = list(pd.unique(improved_plan_v2['bus']))
+        impr_buses = st.multiselect('Which bus of the bus plan do you want to see the table of',
+                                                                impr_all_buses,
+                                                                default=impr_all_buses)
+
+        plot_gantt_chart(improved_plan_v2, impr_buses)
