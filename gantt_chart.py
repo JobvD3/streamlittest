@@ -42,7 +42,6 @@ def plot_gantt_chart(datas: pd.DataFrame, busses_list: list):
                        yrange = (single_bus_schedule['bus'].iloc[0],0.8),
                        color = single_bus_schedule['color'],
                        edgecolor = ['black'])
-        ax.set_xlim(min(single_bus_schedule["start time"])//1, max(single_bus_schedule["end time"])//1 + 1)
 
     #patches = []
     
@@ -54,7 +53,7 @@ def plot_gantt_chart(datas: pd.DataFrame, busses_list: list):
 
     ax.invert_yaxis()
     ax.set_title('Gantt chart of the bus plan')
-    ax.set_xlim(auto=True)
+    ax.set_xlim(min(single_bus_schedule["start time"])//1, max(single_bus_schedule["end time"])//1 + 1)
     ax.set_xticks((list(range(5,25)) + list(range(0,5))))
     ax.set_yticks(list(bus_scedules_dict))
     ax.grid(True)
