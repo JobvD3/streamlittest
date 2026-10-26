@@ -66,12 +66,13 @@ def plot_gantt_chart(datas: pd.DataFrame, busses_list: list):
         hours += [*range(0, time_over + 1)]
     else:
         hours = range(min_time, max_time)
-    hours = list(map(str, hours))
+    #hours = list(map(str, hours))
 
     ax.invert_yaxis()
     ax.set_title('Gantt chart of the bus plan')
     ax.set_xlim(min_time, max_time)
-    ax.set_xticks(hours)
+    ax.set_xticks(range(min_time, max_time))
+    ax.set_xticklabels(hours)
     ax.set_yticks(list(bus_scedules_dict))
     ax.grid(True)
     # ax.legend(handles=patches)
