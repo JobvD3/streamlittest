@@ -43,7 +43,7 @@ with st.sidebar:
     bus_plan = st.file_uploader("Upload here your bus plan", type="xlsx")
     distance_matrix = st.file_uploader("Upload here your distance matrix", type="xlsx")
     st.markdown("Press this button to Re-Run the page")
-    st.button("Re-Run", width="stretch", type="primary")
+    st.button("Re-Run", width="stretch", type="secondary")
 
 with tab1:
     st.header("Welcome to the bus planner tool for line 400 and 401")
