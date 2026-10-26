@@ -9,6 +9,9 @@ from Improvement_Code import improving_plan
 from KPI_calculator import calculate_kpis
 from gantt_chart import plot_gantt_chart
 
+def switch_tab(tab):
+    st.session_state.tab = tab
+
 imag = background_image("images (1).png")
 st.markdown(imag, unsafe_allow_html=True)
 
