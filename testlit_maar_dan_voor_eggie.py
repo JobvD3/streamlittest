@@ -53,11 +53,11 @@ with tab1:
 
     [alles, org, impr, kpi, gantt] = st.columns(5)
 
-    alles.button("All", on_click=switch_tab, args=("All",))
-    org.button("Original plan", on_click=switch_tab, args=("Original plan",))
-    impr.button("Improved plan", on_click=switch_tab, args=("Improved plan",))
-    kpi.button("KPI's", on_click=switch_tab, args=("KPI's",))
-    gantt.button("Gantt-Chart", on_click=switch_tab, args=("Gantt_Chart",))
+    alles.button("All", on_click=switch_tab, args=("All",), width="stretch")
+    org.button("Original plan", on_click=switch_tab, args=("Original plan",), width="stretch")
+    impr.button("Improved plan", on_click=switch_tab, args=("Improved plan",), width="stretch")
+    kpi.button("KPI's", on_click=switch_tab, args=("KPI's",), width="stretch")
+    gantt.button("Gantt-Chart", on_click=switch_tab, args=("Gantt_Chart",), width="stretch")
 
 
 with tab2:
