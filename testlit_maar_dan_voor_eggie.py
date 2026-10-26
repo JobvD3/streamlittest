@@ -160,25 +160,26 @@ with tab2:
         st.subheader("Upload bus plan")
 
 with tab3:
-    with st.container(border=True):
-        st.subheader("Is the improved bus plan feasible?")
-        st.write(impr_feasible)
+    if improved_plan != None:
+        with st.container(border=True):
+            st.subheader("Is the improved bus plan feasible?")
+            st.write(impr_feasible)
 
-        if impr_feasible == False:
-            st.subheader("The improved bus plan has errors")
-            with st.container(border=True, height=100):
-                error_list = impr_error_feasible.split("\n")
-                st.write(error_list)
+            if impr_feasible == False:
+                st.subheader("The improved bus plan has errors")
+                with st.container(border=True, height=100):
+                    error_list = impr_error_feasible.split("\n")
+                    st.write(error_list)
 
-    with st.container(border=True):
-        st.subheader("Does the improved bus plan schedule all trips from the timetable?")
-        st.write(impr_check)
+        with st.container(border=True):
+            st.subheader("Does the improved bus plan schedule all trips from the timetable?")
+            st.write(impr_check)
 
-        if impr_check == False:
-            st.subheader("The trips that are not acounted for are")
-            with st.container(border=True, height=100):
-                error_list = impr_error_check.split("\n")
-                st.write(error_list)
+            if impr_check == False:
+                st.subheader("The trips that are not acounted for are")
+                with st.container(border=True, height=100):
+                    error_list = impr_error_check.split("\n")
+                    st.write(error_list)
 
 with tab4:
     with st.container(border=True):
