@@ -28,11 +28,17 @@ if "timetable" not in st.session_state:
 if "bus_plan" not in st.session_state:
     st.session_state.bus_plan = False
 
+if "bus_plan_v2" not in st.session_state:
+    st.session_state.bus_plan_v2 = [False, False, False, False, False]
+
 if "distance_matrix" not in st.session_state:
     st.session_state.distance_matrix = False
 
 if "improved_plan" not in st.session_state:
     st.session_state.improved_plan = False
+
+if "improved_plan_v2" not in st.session_state:
+    st.session_state.improved_plan_v2 = [False, False, False, False, False]
 
 if "df_kpi" not in st.session_state:
     st.session_state.df_kpi = False
