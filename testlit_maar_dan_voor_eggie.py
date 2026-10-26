@@ -50,8 +50,8 @@ with tab1:
 
     [all, org, impr, kpi, gantt] = st.columns(5)
 
-    all.button("All", on_click=switch_tab, args=("All"))
-    org.button("Original plan", on_click=switch_tab, args=("Original plan"))
+    all.button("All", on_click=switch_tab, args=("All",))
+    org.button("Original plan", on_click=switch_tab, args=("Original plan",))
 
 
 with tab2:
