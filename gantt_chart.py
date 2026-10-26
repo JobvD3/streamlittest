@@ -24,6 +24,9 @@ def plot_gantt_chart(datas: pd.DataFrame, busses_list: list):
     fig, ax = plt.subplots()
     
     activities_list = list(pd.unique(datas['activity'])) #[material, idle, service, charging]
+
+    min_time = 24
+    max_time = 0
     for busses in busses_list:
         single_bus_schedule = datas[datas['bus']==busses]
         bus_scedules_dict[busses] = single_bus_schedule
@@ -43,6 +46,12 @@ def plot_gantt_chart(datas: pd.DataFrame, busses_list: list):
                        color = single_bus_schedule['color'],
                        edgecolor = ['black'])
 
+        if min(single_bus_schedule["start time"])//1 < min_time:
+            min_time = min(single_bus_schedule["start time"])//1
+
+        if max(single_bus_schedule["end time"])//1 + 1 > max_time:
+            max_time = max(single_bus_schedule["end time"])//1 + 1
+
     #patches = []
     
     # dict_color_activity = [{colors_list[x]: activities_list[x]} for x in range(len(colors_list))]
@@ -51,16 +60,16 @@ def plot_gantt_chart(datas: pd.DataFrame, busses_list: list):
         # st.text('space')
         # patches.append([mps.Patch(color= color)])
 
-    if (max(single_bus_schedule["end time"])//1 + 1) > 24:
-        time_over = max(single_bus_schedule["end time"])//1 + 1 - 24
-        hours = range(min(single_bus_schedule["start time"])//1, 25)
-        hours.append(range(0, time_over + 1))
+    if max_time > 24:
+        time_over = max_time - 24
+        hours = [range(min_time, 25)]
+        hours.append([range(0, time_over + 1)])
     else:
-        hours = range(min(single_bus_schedule["start time"])//1, max(single_bus_schedule["end time"])//1 + 1)
+        hours = range(min_time, max_time)
 
     ax.invert_yaxis()
     ax.set_title('Gantt chart of the bus plan')
-    ax.set_xlim(min(single_bus_schedule["start time"])//1, max(single_bus_schedule["end time"])//1 + 1)
+    ax.set_xlim(min_time, max_time)
     ax.set_xticks(hours)
     ax.set_yticks(list(bus_scedules_dict))
     ax.grid(True)
