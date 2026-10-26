@@ -11,6 +11,8 @@ from KPI_calculator import calculate_kpis
 imag = background_image("images (1).png")
 st.markdown(imag, unsafe_allow_html=True)
 
+st.title("Improve bus plan for bus lines 400 and 401")
+
 [tab1, tab2, tab3, tab4] = st.tabs(["All", "Feasability original plan", "Feasability improved plan", "KPI's"])
 
 if "timetable" not in st.session_state:
@@ -24,8 +26,6 @@ if "distance_matrix" not in st.session_state:
 
 if "improved_plan" not in st.session_state:
     st.session_state.improved_plan = False
-
-st.title("Improve bus plan for bus lines 400 and 401")
 
 with st.sidebar:
     st.title("Import here your data as excel files")
