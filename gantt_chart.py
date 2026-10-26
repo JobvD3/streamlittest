@@ -81,5 +81,5 @@ def plot_gantt_chart(datas: pd.DataFrame, busses_list: list):
     ax.grid(True)
     # ax.legend(handles=patches)
 
-    fig.set_figheight(nr_bus)
+    fig.set_figheight(nr_bus*0.5)
     st.pyplot(fig)
