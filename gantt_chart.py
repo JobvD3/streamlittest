@@ -63,7 +63,7 @@ def plot_gantt_chart(datas: pd.DataFrame, busses_list: list):
     if max_time > 24:
         time_over = max_time - 24
         hours = [range(min_time, 25)]
-        hours.append([range(0, time_over + 1)])
+        hours += [range(0, time_over + 1)]
     else:
         hours = range(min_time, max_time)
 
