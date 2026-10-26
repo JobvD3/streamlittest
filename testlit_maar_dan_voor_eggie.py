@@ -200,7 +200,7 @@ with tab3:
     if type(st.session_state.df_kpi) != bool:
         if "Original plan" in df_kpi.columns:
             with st.container(border=True):
-                st.write(df_kpi["Orginal plan"])
+                st.write(df_kpi["Original plan"])
 
 with tab4:
     if type(st.session_state.improved_plan) != bool:
