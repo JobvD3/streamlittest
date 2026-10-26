@@ -80,7 +80,7 @@ with tab1:
             st.subheader("Is the improved bus plan feasible?")
             st.write(impr_feasible)
 
-            if feasible == False:
+            if impr_feasible == False:
                 st.subheader("The improved bus plan has errors")
                 with st.container(border=True, height=100):
                     error_list = impr_error_feasible.split("\n")
@@ -90,7 +90,7 @@ with tab1:
             st.subheader("Does the improved bus plan schedule all trips from the timetable?")
             st.write(impr_check)
 
-            if check == False:
+            if impr_check == False:
                 st.subheader("The trips that are not acounted for are")
                 with st.container(border=True, height=100):
                     error_list = impr_error_check.split("\n")
@@ -164,7 +164,7 @@ with tab3:
         st.subheader("Is the improved bus plan feasible?")
         st.write(impr_feasible)
 
-        if feasible == False:
+        if impr_feasible == False:
             st.subheader("The improved bus plan has errors")
             with st.container(border=True, height=100):
                 error_list = impr_error_feasible.split("\n")
@@ -174,7 +174,7 @@ with tab3:
         st.subheader("Does the improved bus plan schedule all trips from the timetable?")
         st.write(impr_check)
 
-        if check == False:
+        if impr_check == False:
             st.subheader("The trips that are not acounted for are")
             with st.container(border=True, height=100):
                 error_list = impr_error_check.split("\n")
