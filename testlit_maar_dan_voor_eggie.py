@@ -6,6 +6,7 @@ from make_data_usable import str_to_time
 from feasability_check import is_bus_planning_feasible
 from bus_plan_check import bus_plan_timetable_check
 from Improvement_Code import improving_plan
+from KPI_calculator import calculate_kpis
 
 imag = background_image("images (1).png")
 st.markdown(imag, unsafe_allow_html=True)
@@ -91,6 +92,20 @@ if (timetable != None) and (distance_matrix != None):
             with st.container(border=True, height=100):
                 error_list = error_check.split("\n")
                 st.write(error_list)
+
+    with st.container(border=True):
+        st.subheader("KPI's")
+        [impr_bus, impr_ec, impr_stnd] = calculate_kpis(improved_plan)
+        df_kpi = pd.DataFrame(index=["Total busses", "Total energy consumption", "Time not moving"])
+
+        if (bus_plan != None) or (bus_plan != False):
+            [org_bus, org_ec, org_stnd] = calculate_kpis(bus_plan)
+            df_kpi["Original plan"] = [org_bus, org_ec, org_stnd]
+            df_kpi["Improved plan"] = [impr_bus, impr_ec, impr_stnd]
+            st.write(df_kpi)
+        else:
+            df_kpi["Improved plan"] = [impr_bus, impr_ec, impr_stnd]
+            st.write(df_kpi)
 
     st.session_state.improved_plan = improved_plan
     st.session_state.timetable = timetable
