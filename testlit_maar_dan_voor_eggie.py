@@ -252,7 +252,7 @@ with tab6:
             buses_2 = st.multiselect('Which bus of the bus plan do you want to see the table of',
                                                                     all_buses,
                                                                     default=all_buses,
-                                                                    key=3)
+                                                                    key=5)
     
             plot_gantt_chart(df_bus_plan_v2, buses_2)
 
@@ -263,6 +263,6 @@ with tab6:
             impr_buses_2 = st.multiselect('Which bus of the bus plan do you want to see the table of',
                                                                     impr_all_buses,
                                                                     default=impr_all_buses,
-                                                                    key=4)
+                                                                    key=6)
 
             plot_gantt_chart(improved_plan_v2, impr_buses_2)
