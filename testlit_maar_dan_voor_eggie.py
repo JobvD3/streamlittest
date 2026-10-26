@@ -68,10 +68,14 @@ with tab2:
         df_timetable = str_to_time(df_timetable)
 
         if bus_plan != None:
-            df_bus_plan = pd.read_excel(bus_plan)
-            [feasible, error_feasible, df_bus_plan_v2] = is_bus_planning_feasible(df_bus_plan, df_distance_matrix)
-            [check, error_check] = bus_plan_timetable_check(df_bus_plan_v2, df_timetable)
-
+            if bus_plan != st.session_state.bus_plan:
+                df_bus_plan = pd.read_excel(bus_plan)
+                [feasible, error_feasible, df_bus_plan_v2] = is_bus_planning_feasible(df_bus_plan, df_distance_matrix)
+                [check, error_check] = bus_plan_timetable_check(df_bus_plan_v2, df_timetable)
+            else:
+                [feasible, error_feasible, df_bus_plan_v2] = st.session_state.bus_plan_v2[0:3]
+                [check, error_check] = st.session_state.bus_plan_v2[3:]
+            
             with st.container(border=True):
                 st.subheader("Is the bus plan feasible?")
                 st.write(feasible)
@@ -93,14 +97,16 @@ with tab2:
                         st.write(error_list)
 
             st.session_state.bus_plan = bus_plan
+            st.session_state.bus_plan_v2 = [feasible, error_feasible, df_bus_plan_v2, check, error_check]
 
         if (distance_matrix != st.session_state.distance_matrix) or (timetable != st.session_state.timetable):
             improved_plan = improving_plan(df_timetable, df_distance_matrix)[1]
+            [impr_feasible, impr_error_feasible, improved_plan_v2] = is_bus_planning_feasible(improved_plan, df_distance_matrix)
+            [impr_check, impr_error_check] = bus_plan_timetable_check(improved_plan_v2, df_timetable)
         else:
             improved_plan = st.session_state.improved_plan
-        
-        [impr_feasible, impr_error_feasible, improved_plan_v2] = is_bus_planning_feasible(improved_plan, df_distance_matrix)
-        [impr_check, impr_error_check] = bus_plan_timetable_check(improved_plan_v2, df_timetable)
+            [impr_feasible, impr_error_feasible, improved_plan_v2] = st.session_state.improved_plan_v2[0:3]
+            [impr_check, impr_error_check] = st.session_state.improved_plan_v2[3:]
 
         with st.container(border=True):
             st.subheader("Is the improved bus plan feasible?")
@@ -122,12 +128,14 @@ with tab2:
                     error_list = impr_error_check.split("\n")
                     st.write(error_list)
 
+        st.session_state.improved_plan_v2 = [impr_feasible, impr_error_feasible, improved_plan_v2, impr_check, impr_error_check]
+
         with st.container(border=True):
             st.subheader("KPI's")
             [impr_bus, impr_ec, impr_stnd] = calculate_kpis(improved_plan_v2)
             df_kpi = pd.DataFrame(index=["Total busses", "Total energy consumption", "Time not moving"])
 
-            if (bus_plan != None) or (bus_plan != False):
+            if (bus_plan != None) and (bus_plan != False):
                 [org_bus, org_ec, org_stnd] = calculate_kpis(df_bus_plan_v2)
                 df_kpi["Original plan"] = [org_bus, org_ec, org_stnd]
                 df_kpi["Improved plan"] = [impr_bus, impr_ec, impr_stnd]
