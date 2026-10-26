@@ -36,6 +36,8 @@ with st.sidebar:
     timetable = st.file_uploader("Upload here your timetable", type="xlsx")
     bus_plan = st.file_uploader("Upload here your bus plan", type="xlsx")
     distance_matrix = st.file_uploader("Upload here your distance matrix", type="xlsx")
+    st.markdown("Press this button to Re-Run the page")
+    st.button("Re-Run")
 
 with tab1:
     if (timetable != None) and (distance_matrix != None):
@@ -140,7 +142,7 @@ with tab1:
         st.session_state.df_kpi = df_kpi
 
 with tab2:
-    if st.session_state.bus_plan != False:
+    if type(st.session_state.bus_plan) != bool:
         with st.container(border=True):
             st.subheader("Is the bus plan feasible?")
             st.write(feasible)
@@ -164,7 +166,7 @@ with tab2:
         st.subheader("Upload bus plan")
 
 with tab3:
-    if st.session_state.improved_plan != False:
+    if type(st.session_state.improved_plan) != bool:
         with st.container(border=True):
             st.subheader("Is the improved bus plan feasible?")
             st.write(impr_feasible)
@@ -186,12 +188,12 @@ with tab3:
                     st.write(error_list)
 
 with tab4:
-    if st.session_state.df_kpi != False:
+    if type(st.session_state.df_kpi) != bool:
         with st.container(border=True):
             st.write(df_kpi)
 
 with tab5:
-    if st.session_state.bus_plan != False:
+    if type(st.session_state.bus_plan) != bool:
         with st.container(border=True):
             st.subheader("Gantt-Chart of the original bus planning")
             all_buses = list(pd.unique(df_bus_plan_v2['bus']))
@@ -202,7 +204,7 @@ with tab5:
     
             plot_gantt_chart(df_bus_plan_v2, buses_2)
 
-    if st.session_state.improved_plan != False:
+    if type(st.session_state.improved_plan) != bool:
         with st.container(border=True):
             st.subheader("Gantt-Chart of the improved bus planning")
             impr_all_buses = list(pd.unique(improved_plan_v2['bus']))
