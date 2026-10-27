@@ -51,6 +51,15 @@ with st.sidebar:
     timetable = st.file_uploader("Upload here your timetable", type="xlsx")
     bus_plan = st.file_uploader("Upload here your bus plan", type="xlsx")
     distance_matrix = st.file_uploader("Upload here your distance matrix", type="xlsx")
+
+    if st.session_state.improved_plan != False:
+        st.title("Here you can download the improved plan")
+        st.download_button(label="Download here the improved bus plan",
+                           data=improved_plan.to_excel().encode("utf-8"),
+                           file_name="improved_bus_plan_for_buses_400_and_401",
+                           mime="text/excel",
+                           icon=":material/download:")
+
     st.markdown("Press this button to Re-Run the page")
     if st.button("Re-Run", width="stretch", type="secondary"):
         st.session_state.timetable = False
