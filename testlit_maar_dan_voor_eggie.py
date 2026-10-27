@@ -352,5 +352,4 @@ with tab6:
 
             img6 = plot_gantt_chart(improved_plan_v2, impr_buses_2)
             st.pyplot(img6)
-            img6.write_image(file=buffer, format="png")
             download_image(img6)
