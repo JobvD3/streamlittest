@@ -67,6 +67,9 @@ if "df_kpi" not in st.session_state:
 if "images" not in st.session_state:
     st.session_state.images = [False, False, False, False, False, False]
 
+if "buses" not in st.session_state:
+    st.session_state.buses = [False, False]
+
 
 #Sidebar
 with st.sidebar:
@@ -260,20 +263,35 @@ with tab2:
                                                                     default=all_buses,
                                                                     key=1)
     
-            img1 = plot_gantt_chart(df_bus_plan_v2, buses)
+            if (st.session_state.images[0] != False) and (st.session_state.buses[0] != buses):
+                img1 = plot_gantt_chart(df_bus_plan_v2, buses)
+            else:
+                img1 = st.session_state.images[0]
             st.pyplot(img1)
+            download_image(img1)
+
+            st.session_state.images[0] = img1
+            st.session_state.buses[0] = buses
 
     #Gantt-chart improved plan
-    with st.container(border=True):
-        st.subheader("Gantt-Chart of the improved bus planning")
-        impr_all_buses = list(pd.unique(improved_plan_v2['bus']))
-        impr_buses = st.multiselect('Which bus of the bus plan do you want to see the table of',
-                                                                impr_all_buses,
-                                                                default=impr_all_buses,
-                                                                key=2)
+    if type(st.session_state.improved_plan) != bool:
+        with st.container(border=True):
+            st.subheader("Gantt-Chart of the improved bus planning")
+            impr_all_buses = list(pd.unique(improved_plan_v2['bus']))
+            impr_buses = st.multiselect('Which bus of the bus plan do you want to see the table of',
+                                                                    impr_all_buses,
+                                                                    default=impr_all_buses,
+                                                                    key=2)
 
-        img2 = plot_gantt_chart(improved_plan_v2, impr_buses)
-        st.pyplot(img2)
+            if (st.session_state.images[1] != False) and (st.session_state.buses[1] != impr_buses):
+                img2 = plot_gantt_chart(improved_plan_v2, impr_buses)
+            else:
+                img2 = st.session_state.images[1]
+            st.pyplot(img2)
+            download_image(img2)
+
+            st.session_state.images[1] = img2
+            st.session_state.buses[1] = impr_buses
 
 
 #Tab3 everything related to the original plan
@@ -307,13 +325,20 @@ with tab3:
         with st.container(border=True):
             st.subheader("Gantt-Chart of the original bus planning")
             all_buses = list(pd.unique(df_bus_plan_v2['bus']))
-            buses_2 = st.multiselect('Which bus of the bus plan do you want to see the table of',
+            buses = st.multiselect('Which bus of the bus plan do you want to see the table of',
                                                                     all_buses,
                                                                     default=all_buses,
                                                                     key=3)
 
-            img3 = plot_gantt_chart(df_bus_plan_v2, buses_2)
+            if (st.session_state.images[2] != False) and (st.session_state.buses[0] != buses):
+                img3 = plot_gantt_chart(df_bus_plan_v2, buses)
+            else:
+                img3 = st.session_state.images[2]
             st.pyplot(img3)
+            download_image(img3)
+
+            st.session_state.images[2] = img3
+            st.session_state.buses[0] = buses
 
     #KPI's original plan
     if type(st.session_state.df_kpi) != bool:
@@ -351,13 +376,20 @@ with tab4:
         with st.container(border=True):
             st.subheader("Gantt-Chart of the improved bus planning")
             impr_all_buses = list(pd.unique(improved_plan_v2['bus']))
-            impr_buses_2 = st.multiselect('Which bus of the bus plan do you want to see the table of',
+            impr_buses = st.multiselect('Which bus of the bus plan do you want to see the table of',
                                                                     impr_all_buses,
                                                                     default=impr_all_buses,
                                                                     key=4)
 
-            img4 =plot_gantt_chart(improved_plan_v2, impr_buses_2)
+            if (st.session_state.images[3] != False) and (st.session_state.buses[1] != impr_buses):
+                img4 = plot_gantt_chart(improved_plan_v2, impr_buses)
+            else:
+                img4 = st.session_state.images[3]
             st.pyplot(img4)
+            download_image(img4)
+
+            st.session_state.images[3] = img4
+            st.session_state.buses[1] = impr_buses
 
     #KPI's improved plan
     if type(st.session_state.df_kpi) != bool:
@@ -379,24 +411,37 @@ with tab6:
         with st.container(border=True):
             st.subheader("Gantt-Chart of the original bus planning")
             all_buses = list(pd.unique(df_bus_plan_v2['bus']))
-            buses_2 = st.multiselect('Which bus of the bus plan do you want to see the table of',
+            buses = st.multiselect('Which bus of the bus plan do you want to see the table of',
                                                                     all_buses,
                                                                     default=all_buses,
                                                                     key=5)
     
-            img5 = plot_gantt_chart(df_bus_plan_v2, buses_2)
+            if (st.session_state.images[4] != False) and (st.session_state.buses[0] != buses):
+                img5 = plot_gantt_chart(df_bus_plan_v2, buses)
+            else:
+                img5 = st.session_state.images[4]
             st.pyplot(img5)
+            download_image(img5)
+
+            st.session_state.images[4] = img5
+            st.session_state.buses[0] = buses
 
     #Gantt-chart improved plan
     if type(st.session_state.improved_plan) != bool:
         with st.container(border=True):
             st.subheader("Gantt-Chart of the improved bus planning")
             impr_all_buses = list(pd.unique(improved_plan_v2['bus']))
-            impr_buses_2 = st.multiselect('Which bus of the bus plan do you want to see the table of',
+            impr_buses = st.multiselect('Which bus of the bus plan do you want to see the table of',
                                                                     impr_all_buses,
                                                                     default=impr_all_buses,
                                                                     key=6)
 
-            img6 = plot_gantt_chart(improved_plan_v2, impr_buses_2)
+            if (st.session_state.images[5] != False) and (st.session_state.buses[1] != impr_buses):
+                img6 = plot_gantt_chart(improved_plan_v2, impr_buses)
+            else:
+                img6 = st.session_state.images[5]
             st.pyplot(img6)
             download_image(img6)
+
+            st.session_state.images[5] = img6
+            st.session_state.buses[1] = impr_buses
