@@ -52,7 +52,7 @@ with st.sidebar:
     bus_plan = st.file_uploader("Upload here your bus plan", type="xlsx")
     distance_matrix = st.file_uploader("Upload here your distance matrix", type="xlsx")
 
-    if st.session_state.improved_plan != False:
+    if type(st.session_state.improved_plan) != bool:
         st.title("Here you can download the improved plan")
         st.download_button(label="Download here the improved bus plan",
                            data=improved_plan.to_excel().encode("utf-8"),
