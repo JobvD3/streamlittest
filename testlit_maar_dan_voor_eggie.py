@@ -263,7 +263,7 @@ with tab2:
                                                                     default=all_buses,
                                                                     key=1)
     
-            if (st.session_state.images[0] != False) and (st.session_state.buses[0] != buses):
+            if (st.session_state.images[0] == False) or (st.session_state.buses[0] != buses):
                 img1 = plot_gantt_chart(df_bus_plan_v2, buses)
             else:
                 img1 = st.session_state.images[0]
@@ -283,7 +283,7 @@ with tab2:
                                                                     default=impr_all_buses,
                                                                     key=2)
 
-            if (st.session_state.images[1] != False) and (st.session_state.buses[1] != impr_buses):
+            if (st.session_state.images[1] == False) or (st.session_state.buses[1] != impr_buses):
                 img2 = plot_gantt_chart(improved_plan_v2, impr_buses)
             else:
                 img2 = st.session_state.images[1]
@@ -330,7 +330,7 @@ with tab3:
                                                                     default=all_buses,
                                                                     key=3)
 
-            if (st.session_state.images[2] != False) and (st.session_state.buses[0] != buses):
+            if (st.session_state.images[2] == False) or (st.session_state.buses[0] != buses):
                 img3 = plot_gantt_chart(df_bus_plan_v2, buses)
             else:
                 img3 = st.session_state.images[2]
@@ -381,7 +381,7 @@ with tab4:
                                                                     default=impr_all_buses,
                                                                     key=4)
 
-            if (st.session_state.images[3] != False) and (st.session_state.buses[1] != impr_buses):
+            if (st.session_state.images[3] == False) or (st.session_state.buses[1] != impr_buses):
                 img4 = plot_gantt_chart(improved_plan_v2, impr_buses)
             else:
                 img4 = st.session_state.images[3]
@@ -416,7 +416,7 @@ with tab6:
                                                                     default=all_buses,
                                                                     key=5)
     
-            if (st.session_state.images[4] != False) and (st.session_state.buses[0] != buses):
+            if (st.session_state.images[4] == False) or (st.session_state.buses[0] != buses):
                 img5 = plot_gantt_chart(df_bus_plan_v2, buses)
             else:
                 img5 = st.session_state.images[4]
@@ -436,7 +436,7 @@ with tab6:
                                                                     default=impr_all_buses,
                                                                     key=6)
 
-            if (st.session_state.images[5] != False) and (st.session_state.buses[1] != impr_buses):
+            if (st.session_state.images[5] == False) or (st.session_state.buses[1] != impr_buses):
                 img6 = plot_gantt_chart(improved_plan_v2, impr_buses)
             else:
                 img6 = st.session_state.images[5]
