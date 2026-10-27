@@ -26,7 +26,7 @@ def download_image(image):
             filename = filename + ".png"
 
         mem = BytesIO()
-        image.savefig(file=mem, format="png")
+        image.savefig(file=mem, format="png", fnam=filename)
 
         st.download_button(label="Download image", data=mem.getvalue(), file_name=filename, mime="application/png", icon=":material/download:", type="primary")
 
