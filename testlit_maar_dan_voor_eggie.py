@@ -19,6 +19,17 @@ def switch_tab(tab):
 def on_tab_change():
     st.toast(f"You opened the {st.session_state.tab} tab.")
 
+def download_image(image):
+    filename = st.text_input('Enter image file name')
+    if filename != "":
+        if filename.endswith(".png") == False:  # add file extension if it is forgotten
+            filename = filename + ".png"
+
+        mem = BytesIO()
+        image.write_image(file=mem, format="png")
+
+        st.download_button(label="Download image", data=mem.getvalue(), file_name=filename, mime="application/png", icon=":material/download:", type="primary")
+
 imag = background_image("images (1).png")
 st.markdown(imag, unsafe_allow_html=True)
 
@@ -59,7 +70,7 @@ with st.sidebar:
     if type(st.session_state.improved_plan) != bool:
         st.title("Here you can download the improved plan")
         df = st.session_state.improved_plan
-        flnme = st.text_input('Enter Excel file name (e.g. email_data.xlsx)')
+        flnme = st.text_input('Enter Excel file name')
         if flnme != "":
             if flnme.endswith(".xlsx") == False:  # add file extension if it is forgotten
                 flnme = flnme + ".xlsx"
@@ -341,3 +352,5 @@ with tab6:
 
             img6 = plot_gantt_chart(improved_plan_v2, impr_buses_2)
             st.pyplot(img6)
+            img6.write_image(file=buffer, format="png")
+            download_image(img6)

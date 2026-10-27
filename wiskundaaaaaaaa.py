@@ -3,4 +3,5 @@ def sommetje(getal : float|int = 10) -> float|int:
     return antwoord
 
 a = [int, str, bool]
-print(int in a)
+a[1] = "yo"
+print(a)
