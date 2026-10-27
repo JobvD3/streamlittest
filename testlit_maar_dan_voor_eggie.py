@@ -1,5 +1,6 @@
 import streamlit as st
 import pandas as pd
+from io import BytesIO
 
 from opmaak import background_image
 from data_type_check import timetable_type_check
@@ -54,8 +55,17 @@ with st.sidebar:
 
     if type(st.session_state.improved_plan) != bool:
         st.title("Here you can download the improved plan")
-        if st.button("Download here the improved bus plan"):
-            st.session_state.improved_plan.to_excel("improved_bus_plan_buses_400_and_401.xlsx", index=False)
+        df = st.session_state.improved_plan
+        flnme = st.text_input('Enter Excel file name (e.g. email_data.xlsx)')
+        if flnme != "":
+            if flnme.endswith(".xlsx") == False:  # add file extension if it is forgotten
+                flnme = flnme + ".xlsx"
+
+            buffer = BytesIO()
+            with pd.ExcelWriter(buffer, engine='xlsxwriter') as writer:
+                df.to_excel(writer, sheet_name='Report')
+
+            st.download_button(label="Download Excel workbook", data=buffer.getvalue(), file_name=flnme, mime="application/vnd.ms-excel")
 
 
     st.markdown("Press this button to Re-Run the page")
