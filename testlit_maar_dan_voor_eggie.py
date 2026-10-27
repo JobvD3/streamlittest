@@ -19,8 +19,8 @@ def switch_tab(tab):
 def on_tab_change():
     st.toast(f"You opened the {st.session_state.tab} tab.")
 
-def download_image(image):
-    filename = st.text_input('Enter image file name')
+def download_image(image, key_id):
+    filename = st.text_input('Enter image file name', key=key_id)
     if filename != "":
         if filename.endswith(".png") == False:  # add file extension if it is forgotten
             filename = filename + ".png"
@@ -268,7 +268,7 @@ with tab2:
             else:
                 img1 = st.session_state.images[0]
             st.pyplot(img1)
-            download_image(img1)
+            download_image(img1, 1)
 
             st.session_state.images[0] = img1
             st.session_state.buses[0] = buses
@@ -288,7 +288,7 @@ with tab2:
             else:
                 img2 = st.session_state.images[1]
             st.pyplot(img2)
-            download_image(img2)
+            download_image(img2, 2)
 
             st.session_state.images[1] = img2
             st.session_state.buses[1] = impr_buses
@@ -335,7 +335,7 @@ with tab3:
             else:
                 img3 = st.session_state.images[2]
             st.pyplot(img3)
-            download_image(img3)
+            download_image(img3, 3)
 
             st.session_state.images[2] = img3
             st.session_state.buses[0] = buses
@@ -386,7 +386,7 @@ with tab4:
             else:
                 img4 = st.session_state.images[3]
             st.pyplot(img4)
-            download_image(img4)
+            download_image(img4, 4)
 
             st.session_state.images[3] = img4
             st.session_state.buses[1] = impr_buses
@@ -421,7 +421,7 @@ with tab6:
             else:
                 img5 = st.session_state.images[4]
             st.pyplot(img5)
-            download_image(img5)
+            download_image(img5, 5)
 
             st.session_state.images[4] = img5
             st.session_state.buses[0] = buses
@@ -441,7 +441,7 @@ with tab6:
             else:
                 img6 = st.session_state.images[5]
             st.pyplot(img6)
-            download_image(img6)
+            download_image(img6, 6)
 
             st.session_state.images[5] = img6
             st.session_state.buses[1] = impr_buses
