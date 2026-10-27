@@ -65,7 +65,7 @@ with st.sidebar:
             with pd.ExcelWriter(buffer, engine='xlsxwriter') as writer:
                 df.to_excel(writer, sheet_name='Report')
 
-            st.download_button(label="Download Excel workbook", data=buffer.getvalue(), file_name=flnme, mime="application/vnd.ms-excel", icon=":material/download:", type="secondary")
+            st.download_button(label="Download Excel workbook", data=buffer.getvalue(), file_name=flnme, mime="application/vnd.ms-excel", icon=":material/download:", type="primary")
 
 
     st.markdown("Press this button to Re-Run the page")
