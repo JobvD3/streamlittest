@@ -78,4 +78,4 @@ def plot_gantt_chart(datas: pd.DataFrame, busses_list: list):
 
     fig.set_figheight(nr_bus*0.5)
     fig.legend(handles=legenda, bbox_to_anchor=(0, 0, 1, 0), loc="center", mode="expand", ncol=len(activities_list))
-    st.pyplot(fig)
+    return fig

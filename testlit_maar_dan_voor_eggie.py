@@ -47,6 +47,9 @@ if "improved_plan_v2" not in st.session_state:
 if "df_kpi" not in st.session_state:
     st.session_state.df_kpi = False
 
+if "images" not in st.session_state:
+    st.session_state.images = [False, False, False, False, False, False]
+
 with st.sidebar:
     st.title("Import here your data as excel files")
     timetable = st.file_uploader("Upload here your timetable", type="xlsx")
@@ -211,7 +214,8 @@ with tab2:
                                                                             default=all_buses,
                                                                             key=1)
             
-                    plot_gantt_chart(df_bus_plan_v2, buses)
+                    img1 = plot_gantt_chart(df_bus_plan_v2, buses)
+                    st.pyplot(img1)
         
             with st.container(border=True):
                 st.subheader("Gantt-Chart of the improved bus planning")
@@ -221,7 +225,8 @@ with tab2:
                                                                         default=impr_all_buses,
                                                                         key=2)
         
-                plot_gantt_chart(improved_plan_v2, impr_buses)
+                img2 = plot_gantt_chart(improved_plan_v2, impr_buses)
+                st.pyplot(img2)
 
             
             st.session_state.timetable = timetable
@@ -261,7 +266,8 @@ with tab3:
                                                                     default=all_buses,
                                                                     key=3)
 
-            plot_gantt_chart(df_bus_plan_v2, buses_2)
+            img3 = plot_gantt_chart(df_bus_plan_v2, buses_2)
+            st.pyplot(img3)
 
     if type(st.session_state.df_kpi) != bool:
         if "Original plan" in df_kpi.columns:
@@ -299,7 +305,8 @@ with tab4:
                                                                     default=impr_all_buses,
                                                                     key=4)
 
-            plot_gantt_chart(improved_plan_v2, impr_buses_2)
+            img4 =plot_gantt_chart(improved_plan_v2, impr_buses_2)
+            st.pyplot(img4)
 
     if type(st.session_state.df_kpi) != bool:
         with st.container(border=True):
@@ -320,7 +327,8 @@ with tab6:
                                                                     default=all_buses,
                                                                     key=5)
     
-            plot_gantt_chart(df_bus_plan_v2, buses_2)
+            img5 = plot_gantt_chart(df_bus_plan_v2, buses_2)
+            st.pyplot(img5)
 
     if type(st.session_state.improved_plan) != bool:
         with st.container(border=True):
@@ -331,4 +339,5 @@ with tab6:
                                                                     default=impr_all_buses,
                                                                     key=6)
 
-            plot_gantt_chart(improved_plan_v2, impr_buses_2)
+            img6 = plot_gantt_chart(improved_plan_v2, impr_buses_2)
+            st.pyplot(img6)
