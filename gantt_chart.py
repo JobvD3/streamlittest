@@ -80,6 +80,6 @@ def plot_gantt_chart(datas: pd.DataFrame, busses_list: list):
     fig.set_figheight(nr_bus*0.8)
     fig.set_figwidth((max_time - min_time))
 
-    plt.subplots_adjust(left=0.1, right=0.9, top=0.9, bottom=0.1)
+    plt.subplots_adjust(left=-0.1, right=1.1, top=1, bottom=-0.1)
 
     return fig
