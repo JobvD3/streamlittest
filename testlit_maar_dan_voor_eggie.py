@@ -156,6 +156,8 @@ with tab2:
                 [impr_feasible, impr_error_feasible, improved_plan_v2] = st.session_state.improved_plan_v2[0:3]
                 [impr_check, impr_error_check] = st.session_state.improved_plan_v2[3:]
 
+            st.session_state.improved_plan = improved_plan
+
             with st.container(border=True):
                 st.subheader("Is the improved bus plan feasible?")
                 st.write(impr_feasible)
@@ -213,7 +215,7 @@ with tab2:
         
                 plot_gantt_chart(improved_plan_v2, impr_buses)
 
-            st.session_state.improved_plan = improved_plan
+            
             st.session_state.timetable = timetable
             st.session_state.distance_matrix = distance_matrix
             st.session_state.df_kpi = df_kpi
