@@ -3,4 +3,4 @@ pandas
 matplotlib
 streamlit
 openpyxl
-excel_writer
+xlsxwriter
