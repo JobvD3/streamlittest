@@ -54,11 +54,9 @@ with st.sidebar:
 
     if type(st.session_state.improved_plan) != bool:
         st.title("Here you can download the improved plan")
-        st.download_button(label="Download here the improved bus plan",
-                           data=st.session_state.improved_plan.to_excel().encode("utf-8"),
-                           file_name="improved_bus_plan_for_buses_400_and_401",
-                           mime="text/excel",
-                           icon=":material/download:")
+        if st.button("Download here the improved bus plan"):
+            st.session_state.improved_plan.to_excel("improved_bus_plan_buses_400_and_401.xlsx", index=False)
+
 
     st.markdown("Press this button to Re-Run the page")
     if st.button("Re-Run", width="stretch", type="secondary"):
