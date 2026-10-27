@@ -2,6 +2,9 @@ import streamlit as st
 import pandas as pd
 
 from opmaak import background_image
+from data_type_check import timetable_type_check
+from data_type_check import bus_plan_type_check
+from data_type_check import distance_matrix_type_check
 from make_data_usable import str_to_time
 from feasability_check import is_bus_planning_feasible
 from bus_plan_check import bus_plan_timetable_check
@@ -79,110 +82,132 @@ with tab2:
         df_timetable = pd.read_excel(timetable)
         df_distance_matrix = pd.read_excel(distance_matrix)
 
-        df_timetable = str_to_time(df_timetable)
+        with st.container(border=True):
+            [feasible_tt, error_tt] = timetable_type_check(df_timetable)
+            [feasible_dm, error_dm] = distance_matrix_type_check(df_distance_matrix)
 
-        if bus_plan != None:
-            if bus_plan != st.session_state.bus_plan:
-                df_bus_plan = pd.read_excel(bus_plan)
-                [feasible, error_feasible, df_bus_plan_v2] = is_bus_planning_feasible(df_bus_plan, df_distance_matrix)
-                [check, error_check] = bus_plan_timetable_check(df_bus_plan_v2, df_timetable)
-            else:
-                [feasible, error_feasible, df_bus_plan_v2] = st.session_state.bus_plan_v2[0:3]
-                [check, error_check] = st.session_state.bus_plan_v2[3:]
+            if feasible_tt == False:
+                st.header("The timetable has unexpected data")
+                with st.container(border=True, height=100):
+                    st.markdown(error_tt.split("\n"))
+
+            if feasible_dm == False:
+                st.header("The distance matrix has unexpected data")
+                with st.container(border=True, height=100):
+                    st.markdown(error_dm.split("\n"))
             
-            with st.container(border=True):
-                st.subheader("Is the bus plan feasible?")
-                st.write(feasible)
-
-                if feasible == False:
-                    st.subheader("The bus plan has errors")
+            if bus_plan != None:
+                df_bus_plan = pd.read_excel(bus_plan)
+                [feasible_bp, error_bp] = bus_plan_type_check(df_bus_plan)
+                if feasible_bp == False:
+                    st.header("The original bus plan has unexpected data")
                     with st.container(border=True, height=100):
-                        error_list = error_feasible.split("\n")
+                        st.markdown(error_bp.split("\n"))
+
+        if feasible_tt == True and feasible_dm == True:
+            df_timetable = str_to_time(df_timetable)
+
+            if bus_plan != None and feasible_bp == True:
+                if bus_plan != st.session_state.bus_plan:
+                    [feasible, error_feasible, df_bus_plan_v2] = is_bus_planning_feasible(df_bus_plan, df_distance_matrix)
+                    [check, error_check] = bus_plan_timetable_check(df_bus_plan_v2, df_timetable)
+                else:
+                    [feasible, error_feasible, df_bus_plan_v2] = st.session_state.bus_plan_v2[0:3]
+                    [check, error_check] = st.session_state.bus_plan_v2[3:]
+                
+                with st.container(border=True):
+                    st.subheader("Is the bus plan feasible?")
+                    st.write(feasible)
+
+                    if feasible == False:
+                        st.subheader("The bus plan has errors")
+                        with st.container(border=True, height=100):
+                            error_list = error_feasible.split("\n")
+                            st.write(error_list)
+
+                with st.container(border=True):
+                    st.subheader("Does the bus plan schedule all trips from the timetable?")
+                    st.write(check)
+
+                    if check == False:
+                        st.subheader("The trips that are not acounted for are")
+                        with st.container(border=True, height=100):
+                            error_list = error_check.split("\n")
+                            st.write(error_list)
+
+                st.session_state.bus_plan = bus_plan
+                st.session_state.bus_plan_v2 = [feasible, error_feasible, df_bus_plan_v2, check, error_check]
+
+            if (distance_matrix != st.session_state.distance_matrix) or (timetable != st.session_state.timetable):
+                improved_plan = improving_plan(df_timetable, df_distance_matrix)[1]
+                [impr_feasible, impr_error_feasible, improved_plan_v2] = is_bus_planning_feasible(improved_plan, df_distance_matrix)
+                [impr_check, impr_error_check] = bus_plan_timetable_check(improved_plan_v2, df_timetable)
+            else:
+                improved_plan = st.session_state.improved_plan
+                [impr_feasible, impr_error_feasible, improved_plan_v2] = st.session_state.improved_plan_v2[0:3]
+                [impr_check, impr_error_check] = st.session_state.improved_plan_v2[3:]
+
+            with st.container(border=True):
+                st.subheader("Is the improved bus plan feasible?")
+                st.write(impr_feasible)
+
+                if impr_feasible == False:
+                    st.subheader("The improved bus plan has errors")
+                    with st.container(border=True, height=100):
+                        error_list = impr_error_feasible.split("\n")
                         st.write(error_list)
 
             with st.container(border=True):
-                st.subheader("Does the bus plan schedule all trips from the timetable?")
-                st.write(check)
+                st.subheader("Does the improved bus plan schedule all trips from the timetable?")
+                st.write(impr_check)
 
-                if check == False:
+                if impr_check == False:
                     st.subheader("The trips that are not acounted for are")
                     with st.container(border=True, height=100):
-                        error_list = error_check.split("\n")
+                        error_list = impr_error_check.split("\n")
                         st.write(error_list)
 
-            st.session_state.bus_plan = bus_plan
-            st.session_state.bus_plan_v2 = [feasible, error_feasible, df_bus_plan_v2, check, error_check]
+            st.session_state.improved_plan_v2 = [impr_feasible, impr_error_feasible, improved_plan_v2, impr_check, impr_error_check]
 
-        if (distance_matrix != st.session_state.distance_matrix) or (timetable != st.session_state.timetable):
-            improved_plan = improving_plan(df_timetable, df_distance_matrix)[1]
-            [impr_feasible, impr_error_feasible, improved_plan_v2] = is_bus_planning_feasible(improved_plan, df_distance_matrix)
-            [impr_check, impr_error_check] = bus_plan_timetable_check(improved_plan_v2, df_timetable)
-        else:
-            improved_plan = st.session_state.improved_plan
-            [impr_feasible, impr_error_feasible, improved_plan_v2] = st.session_state.improved_plan_v2[0:3]
-            [impr_check, impr_error_check] = st.session_state.improved_plan_v2[3:]
-
-        with st.container(border=True):
-            st.subheader("Is the improved bus plan feasible?")
-            st.write(impr_feasible)
-
-            if impr_feasible == False:
-                st.subheader("The improved bus plan has errors")
-                with st.container(border=True, height=100):
-                    error_list = impr_error_feasible.split("\n")
-                    st.write(error_list)
-
-        with st.container(border=True):
-            st.subheader("Does the improved bus plan schedule all trips from the timetable?")
-            st.write(impr_check)
-
-            if impr_check == False:
-                st.subheader("The trips that are not acounted for are")
-                with st.container(border=True, height=100):
-                    error_list = impr_error_check.split("\n")
-                    st.write(error_list)
-
-        st.session_state.improved_plan_v2 = [impr_feasible, impr_error_feasible, improved_plan_v2, impr_check, impr_error_check]
-
-        with st.container(border=True):
-            st.subheader("KPI's")
-            [impr_bus, impr_ec, impr_stnd] = calculate_kpis(improved_plan_v2)
-            df_kpi = pd.DataFrame(index=["Total busses", "Total energy consumption", "Time not moving"])
-
-            if (bus_plan != None) and (bus_plan != False):
-                [org_bus, org_ec, org_stnd] = calculate_kpis(df_bus_plan_v2)
-                df_kpi["Original plan"] = [org_bus, org_ec, org_stnd]
-                df_kpi["Improved plan"] = [impr_bus, impr_ec, impr_stnd]
-                st.write(df_kpi)
-            else:
-                df_kpi["Improved plan"] = [impr_bus, impr_ec, impr_stnd]
-                st.write(df_kpi)
-
-        if bus_plan != None:
             with st.container(border=True):
-                st.subheader("Gantt-Chart of the original bus planning")
-                all_buses = list(pd.unique(df_bus_plan_v2['bus']))
-                buses = st.multiselect('Which bus of the bus plan do you want to see the table of',
-                                                                        all_buses,
-                                                                        default=all_buses,
-                                                                        key=1)
-        
-                plot_gantt_chart(df_bus_plan_v2, buses)
-    
-        with st.container(border=True):
-            st.subheader("Gantt-Chart of the improved bus planning")
-            impr_all_buses = list(pd.unique(improved_plan_v2['bus']))
-            impr_buses = st.multiselect('Which bus of the bus plan do you want to see the table of',
-                                                                    impr_all_buses,
-                                                                    default=impr_all_buses,
-                                                                    key=2)
-    
-            plot_gantt_chart(improved_plan_v2, impr_buses)
+                st.subheader("KPI's")
+                [impr_bus, impr_ec, impr_stnd] = calculate_kpis(improved_plan_v2)
+                df_kpi = pd.DataFrame(index=["Total busses", "Total energy consumption", "Time not moving"])
 
-        st.session_state.improved_plan = improved_plan
-        st.session_state.timetable = timetable
-        st.session_state.distance_matrix = distance_matrix
-        st.session_state.df_kpi = df_kpi
+                if (bus_plan != None) and (bus_plan != False):
+                    [org_bus, org_ec, org_stnd] = calculate_kpis(df_bus_plan_v2)
+                    df_kpi["Original plan"] = [org_bus, org_ec, org_stnd]
+                    df_kpi["Improved plan"] = [impr_bus, impr_ec, impr_stnd]
+                    st.write(df_kpi)
+                else:
+                    df_kpi["Improved plan"] = [impr_bus, impr_ec, impr_stnd]
+                    st.write(df_kpi)
+
+            if bus_plan != None:
+                with st.container(border=True):
+                    st.subheader("Gantt-Chart of the original bus planning")
+                    all_buses = list(pd.unique(df_bus_plan_v2['bus']))
+                    buses = st.multiselect('Which bus of the bus plan do you want to see the table of',
+                                                                            all_buses,
+                                                                            default=all_buses,
+                                                                            key=1)
+            
+                    plot_gantt_chart(df_bus_plan_v2, buses)
+        
+            with st.container(border=True):
+                st.subheader("Gantt-Chart of the improved bus planning")
+                impr_all_buses = list(pd.unique(improved_plan_v2['bus']))
+                impr_buses = st.multiselect('Which bus of the bus plan do you want to see the table of',
+                                                                        impr_all_buses,
+                                                                        default=impr_all_buses,
+                                                                        key=2)
+        
+                plot_gantt_chart(improved_plan_v2, impr_buses)
+
+            st.session_state.improved_plan = improved_plan
+            st.session_state.timetable = timetable
+            st.session_state.distance_matrix = distance_matrix
+            st.session_state.df_kpi = df_kpi
 
 with tab3:
     if type(st.session_state.bus_plan) != bool:
