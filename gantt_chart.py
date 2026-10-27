@@ -77,7 +77,7 @@ def plot_gantt_chart(datas: pd.DataFrame, busses_list: list):
     ax.grid(True)
 
     ax.legend(handles=legenda, bbox_to_anchor=(0, -1/nr_bus, 1, -1/nr_bus), loc="lower center", mode="expand", ncol=len(activities_list))
-    fig.set_figheight(nr_bus*0.8)
+    fig.set_figheight(nr_bus*0.5)
     fig.set_figwidth((max_time - min_time))
 
     return fig
