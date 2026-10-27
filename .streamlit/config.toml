@@ -8,6 +8,6 @@ textColor="crimson"
 
 [theme.sidebar]
 backgroundColor="crimson"
-secondaryBackgroundColor="white"
+secondaryBackgroundColor="crimson"
 baseRadius="none"
 textColor="white"
