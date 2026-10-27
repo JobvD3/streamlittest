@@ -63,7 +63,7 @@ with st.sidebar:
 
             buffer = BytesIO()
             with pd.ExcelWriter(buffer, engine='xlsxwriter') as writer:
-                df.to_excel(writer, sheet_name='Report')
+                df.to_excel(writer, sheet_name='plan', index=False)
 
             st.download_button(label="Download Excel workbook", data=buffer.getvalue(), file_name=flnme, mime="application/vnd.ms-excel", icon=":material/download:", type="primary")
 
