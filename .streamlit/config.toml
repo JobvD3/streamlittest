@@ -7,8 +7,7 @@ baseRadius="full"
 textColor="crimson"
 
 [theme.sidebar]
-primaryColor="red"
 backgroundColor="crimson"
-secondaryBackgroundColor="white"
+secondaryBackgroundColor="red"
 baseRadius="none"
 textColor="white"
