@@ -56,3 +56,9 @@ with st.container(border=True):
 with st.container(border=True):
     st.video("https://youtu.be/pYcguzH1FiA?is=8RU5c3DMCAyej7Yv")
 
+    file = open("P5G8_User_instructions.pdf", "rb")
+    st.download_button(label="Download user instructions",
+                       data = file
+                       file_name="P5G8_User_instructions.pdf"
+                       mime="pdf")
+
