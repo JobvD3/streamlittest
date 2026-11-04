@@ -58,7 +58,7 @@ with st.container(border=True):
 
     file = open("P5G8_User_instructions.pdf", "rb")
     st.download_button(label="Download user instructions",
-                       data = file
-                       file_name="P5G8_User_instructions.pdf"
+                       data = file,
+                       file_name="P5G8_User_instructions.pdf",
                        mime="pdf")
 
